@@ -66,15 +66,18 @@
 
     <script>
       function openNavigationApp() {
-        var app = prompt("באיזו אפליקציה תרצה לפתוח את הניווט?\n1. וויז\n2. גוגל מפות");
-        if (app === "1") {
-          window.location.href = "https://www.waze.com/";
-        } else if (app === "2") {
-          window.location.href = "https://www.google.com/maps";
-        } else {
-          alert("אנא בחר אפליקציה חוקית.");
-        }
-      }
+    var app = prompt("באיזו אפליקציה תרצה לפתוח את הניווט?\n1. וויז\n2. גוגל מפות");
+    var address = encodeURI("חטיבת הנחל 16 חדרה");
+    if (app === "1") {
+        window.location.href = "https://www.waze.com/ul?q=" + address;
+    } else if (app === "2") {
+        window.location.href = "https://www.google.com/maps?q=" + address;
+    } else {
+        alert("אנא בחר אפליקציה חוקית.");
+    }
+}
+
+
 
       function addToContacts() {
         var contactName = "הראל שלום מתכנת";
