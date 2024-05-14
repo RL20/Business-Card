@@ -78,11 +78,13 @@
       }
 
       function downloadVCard() {
-        var contactName = "הראל שלום מפתח תוכנה";
+        var contactName = "הראל שלום";
         var phoneNumber = "0526966833";
         var email = "harel_shalom@yahoo.com";
-        var github = "https://github.com/RL20";
-        var role = "RLS פיתוח תוכנה";
+        var address = 'חטיבת הנח"ל 16, חדרה';
+        var website = "https://rl20.github.io/Bussines-Card/";
+        var title = "RLS פיתוח תוכנה";
+        var photoURL = "https://raw.githubusercontent.com/RL20/Bussines-Card/main/RLS.png";
 
         var vCardData =
           "BEGIN:VCARD\n" +
@@ -96,11 +98,17 @@
           "EMAIL:" +
           email +
           "\n" +
+          "ADR;TYPE=HOME:" +
+          address +
+          "\n" +
           "URL:" +
-          github +
+          website +
           "\n" +
           "TITLE:" +
-          role +
+          title +
+          "\n" +
+          "PHOTO;VALUE=URL:" +
+          photoURL +
           "\n" +
           "END:VCARD";
 
