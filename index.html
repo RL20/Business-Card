@@ -12,12 +12,20 @@
         padding: 0;
         background-color: #f5f5f5;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start; /* Align content to the top */
-        min-height: 100vh;
-        overflow: hidden; /* Prevents scrollbars during animation */
+        justify-content: center; /* Center align the content */
+        /*align-items: center; /* Vertically center the content */
+        height: 100vh;
+        width: 100vw;
       }
+      .card {
+        background-color: #fff; /* Background color of the card */
+        width: 60%; /* The card occupies 3/5 of the page width */
+        padding: 20px;
+        border-radius: 10px; /* Rounded corners for the card */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for the card */
+        /*margin: 0 auto; /* Margins of 1/5 of the page width on both sides */
+      }
+
       .icons {
         text-align: center;
         margin-top: 20px;
@@ -33,6 +41,7 @@
       }
       .icons i:hover {
         color: gold;
+        font-size: 50px;
       }
       .button-container {
         text-align: center;
@@ -63,6 +72,45 @@
         position: absolute;
         top: 0;
         animation: slideDown 2s forwards; /* Apply the animation */
+      }
+      .modal {
+        display: none; /* hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.832);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        background-color: #b3d4fc;
+        margin: 25% auto; /* work according to screen*/
+        padding: 20px;
+        border: 1px solid #888;
+        width: 500px;
+        height: 400px;
+        text-align: center;
+        border-radius: 5%;
+      }
+
+      .close {
+        color: #aaa;
+        color: red;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
       }
 
       @keyframes slideDown {
@@ -97,34 +145,51 @@
     <div class="profile-img">
       <img src="./RLS.png" alt="Profile Image" />
     </div>
-
-    <div class="icons" style="margin-top: 500px">
-      <!-- Adjusted margin to ensure icons are below the image after animation -->
-      <a href="https://www.waze.com/ul?q=חטיבת הנחל 16 חדרה" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
-      <a href="https://www.google.com/maps?q=חטיבת הנחל 16 חדרה" target="_blank"
-        ><i class="fas fa-map-marked-alt"></i
-      ></a>
-      <a href="mailto:harel_shalom@yahoo.com"><i class="far fa-envelope"></i></a>
-      <a href="tel:0526966833"><i class="fas fa-phone"></i></a>
-      <a href="https://wa.me/972526966833" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://github.com/RL20" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="#" onclick="openNavigationApp(); return false;"><i class="fas fa-map"></i></a>
+    <div class="card">
+      <div class="icons" style="margin-top: 500px">
+        <i class="fas fa-map-marker-alt" onclick="openNavigationOptions()"></i>
+        <i class="fas fa-desktop"></i>
+        <a href="https://github.com/RL20" target="_blank"><i class="fas fa-globe"></i></a>
+        <a href="https://wa.me/972526966833" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:harel_shalom@yahoo.com"><i class="far fa-envelope"></i></a>
+        <a href="tel:0526966833"><i class="fas fa-phone"></i></a>
+      </div>
+      <div></div>
+      <!-- window with navigation options-->
+      <div id="navigationModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <span class="close" onclick="closeNavigationOptions()">&times;</span>
+          <p>Choose a navigation app:</p>
+          <!-- link to Google Maps-->
+          <i class="fas fa-map-marked-alt navigation-icons" onclick="openGoogleMaps()"></i>
+          <i class="fab fa-waze navigation-icons" onclick="openWaze()"></i>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="button" onclick="downloadVCard()">Add Contact</button>
+      </div>
     </div>
-    <div class="button-container">
-      <button class="button" onclick="downloadVCard()">הוסף איש קשר</button>
-    </div>
-
     <script>
-      function openNavigationApp() {
-        var app = prompt("באיזו אפליקציה תרצה לפתוח את הניווט?\n1. וויז\n2. גוגל מפות");
-        var address = encodeURI("חטיבת הנחל 16 חדרה");
-        if (app === "1") {
-          window.location.href = "https://www.waze.com/ul?q=" + address;
-        } else if (app === "2") {
-          window.location.href = "https://www.google.com/maps?q=" + address;
-        } else {
-          alert("אנא בחר אפליקציה חוקית.");
-        }
+      // open navigation window
+      function openNavigationOptions() {
+        var modal = document.getElementById("navigationModal");
+        modal.style.display = "block";
+      }
+
+      // close navigation window
+      function closeNavigationOptions() {
+        var modal = document.getElementById("navigationModal");
+        modal.style.display = "none";
+      }
+
+      // open Google Maps
+      function openGoogleMaps() {
+        window.open("https://www.google.com/maps/search/?api=1&query=מסגר+4,+חדרה");
+      }
+
+      // open Waze
+      function openWaze() {
+        window.open("https://waze.com/ul?q=מסגר+4,+חדרה");
       }
 
       function downloadVCard() {
